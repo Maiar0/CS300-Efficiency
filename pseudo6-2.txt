@@ -1,0 +1,96 @@
+implement print within struct for singular object 
+struct Course {
+  string courseId;
+  string description;
+  vector<string> preReq;
+
+  void print() const {
+    cout << "Course Department: " << courseId << endl;
+    cout << "Description: " << description << endl;
+    if (preReq.size() > 0) {
+      cout << "Pre-requisites: ";
+      for (const auto &i : preReq) {
+        cout << i;
+        if (i != preReq.back()) {
+          cout << ", ";
+        }
+      }
+      cout << endl;
+    }
+    cout << endl;
+  }
+};
+
+function displayMenu():
+    print("Menu:")
+    print("1. Load Data Structure")
+    print("2. Print Course List")
+    print("3. Print Course")
+    print("4. Exit")
+
+printCourseList(dataStructure){
+	iterate through (bst, hashtable, or vector)//see pseudocode below for how to print
+		course.print()
+
+void quickSort(vector<Course>& course, int begin, int end) {
+    if (begin >= end) {
+        return;
+    }
+    int p = partition(course, begin, end);//final index of pivot in the sorted array
+    quickSort(course, begin, p-1);// recursively sort low partition (begin to mid-1)
+    quickSort(course, p, end);// recursively sort high partition (mid to end)
+}
+
+printVector(vector of courses) {
+	quickSort(courses);//so its in alphanumerical order
+    for (int i = 0; i < courses.size(); ++i) {
+        courses[i].print();
+    }
+}
+
+printHashTable(courses){//hash table does not support alphanumerical printing easily unless keys are used as the paramater you print by and collision is non existent
+	iterate over hashtable
+		insert into vector//could use BST as well
+		print(vector)
+}
+
+printBST(node = root){//prints alphanumerical order
+  if (node != nullptr) { // if node is not equal to null ptr
+    inOrder(node->left); // call on left
+    node->course.print();
+    inOrder(node->right); // call on right
+  }
+}
+
+
+
+// Main menu loop
+    while true:
+        // Display menu options
+        displayMenu()
+
+        // Get user input for menu choice
+        choice = getUserChoice()
+
+        // Perform action based on user choice
+        switch choice:
+            case 1:
+                // Load Data Structure
+					reads data into chosen struct//see pseudocode for specific struct on how to load in
+					ensures data is valid
+                break
+            case 2:
+                // Print Course List
+                printCourseList(dataStructure)
+                break
+            case 3:
+                // Print Course see specific struct pseudocode on how to SEARCH for course
+                Search(course).print()
+                break
+            case 9:
+                // Exit
+                print(goodbye)
+				return 0
+            default:
+                // Invalid choice
+                print("Invalid choice. Please select a valid option.")

@@ -1,0 +1,76 @@
+// Initialize Hash Table and Course Structure
+Structure Course {
+    String number
+    String title
+    vector<string> prereq
+}
+
+ BinarySearchTree* bst;
+ bst = new BinarySearchTree();
+
+// Open File
+File inputFile = openFile("name")
+if (inputFile does not exist) {
+    displayErrorMessage()
+}
+
+// Read File and Populate Hash Table
+ForEach line in inputFile {
+    number = readFieldFromLine(inputFile until comma)
+    title = readFieldFromLine(inputFile until comma)
+    vector prereq
+    while (inputFile has more prerequisites) {
+        prereqValue = readPrerequisiteFromLine(inputFile until comma)
+        append prereqValue to prereq
+    }
+    course = new Course(number, title, prereq)
+    insert course into bst using last three characters of number as key
+	//this may repeat with larger course selection TBD if that is the case(possibly changes characters to the number form)
+}
+
+
+vector<string> validCourses
+ForEach course in bst {
+    if (course.number is empty OR course.title is empty) {
+        remove course from bst
+    }
+	else{
+		append course.number to validCourses
+	}
+}
+
+validPreReq
+ForEach course in bst {//this will have to repeat until no adjustments are made to ensure a course isnt removed that was a prereq
+    ForEach prerequisite in course.prereq {
+        if (prerequisite is not in validCourses) {
+            remove course from courses
+			remove course from validCourses(if found)
+        }
+    }
+}
+
+closeFile(inputFile)
+
+// Print Course Information and Prerequisites
+// Prompt user for course number to search
+courseNumberToSearch = GetUserInput("Enter course number to search")
+
+// Search for the course in the hash table
+lookup(number){
+	node = root of bst
+	while node not null
+		if node.number is equal to number{
+			return number
+		}
+		if number < node.number{ go left}
+		else number > node.number{go right}
+	course = emptyCourse()
+	return course
+
+foundCourse = lookup(courseNumberToSearch)
+
+// If course is found, print information
+if foundCourse is not null
+    PrintCourseInformation(foundCourse)
+else
+    DisplayErrorMessage("Course not found")

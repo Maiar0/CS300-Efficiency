@@ -1,0 +1,60 @@
+//instiallize
+Structure Course {
+    String number
+    String title
+    vector<string> prereq
+}
+vector<Course> courses
+
+//open file
+File inputFile = openFile("name")
+if (inputFile does not exist) {
+    displayErrorMessage()
+}
+
+//read in file
+ForEach line in inputFile {
+    number = readFieldFromLine(inputFile until comma)
+    title = readFieldFromLine(inputFile until comma)
+    vector prereq
+    while (inputFile has more prerequisites) {
+        prereqValue = readPrerequisiteFromLine(inputFile until comma)
+        append prereqValue to prereq
+    }
+    course = new Course(number, title, prereq)
+    append course to courses
+}
+
+closeFile(inputFile)
+
+vector<string> validCourses
+ForEach course in courses {
+    if (course.number is empty OR course.title is empty) {
+        remove course from courses
+    }
+	else{
+		append course.number to validCourses
+	}
+}
+
+validPreReq
+ForEach course in courses {
+    ForEach prerequisite in course.prereq {
+        if (prerequisite is not in validCourses) {
+            remove course from courses
+        }
+    }
+}
+
+3.
+// Prompt user for course number to search
+courseNumberToSearch = GetUserInput("Enter course number to search")
+
+// Search for the course in the vector
+foundCourse = SearchCourse(courseNumberToSearch, courses)
+
+// If course is found, print information
+if foundCourse is not null
+    PrintCourseInformation(foundCourse)
+else
+    DisplayErrorMessage("Course not found")
